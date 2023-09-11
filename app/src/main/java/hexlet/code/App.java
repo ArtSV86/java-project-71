@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.Differ.*;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -14,7 +13,7 @@ public final class App implements Callable<Integer> {
     private static final int ERROR_EXIT_CODE = 1;
     @Option(names = {"-f", "--format"},
             defaultValue = "stylish",
-          //  paramLabel = "format",
+            paramLabel = "format",
             description = "output format [default: ${DEFAULT-VALUE}]")
     private String formatName;
     @Option(names = {"-h", "--help"},
