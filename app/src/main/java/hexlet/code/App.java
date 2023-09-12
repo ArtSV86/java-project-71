@@ -30,6 +30,7 @@ public final class App implements Callable<Integer> {
             index = "1",
             description = "path to second file")
     private String filePath2;
+
     @Override
     public Integer call() {
 
@@ -42,6 +43,7 @@ public final class App implements Callable<Integer> {
         }
         return SUCCESS_EXIT_CODE;
     }
+
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);

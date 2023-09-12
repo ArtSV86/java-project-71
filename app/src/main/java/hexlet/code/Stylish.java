@@ -1,10 +1,10 @@
 package hexlet.code;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
-public class Json {
-    public static String differenceToJson(List<Map<String, Object>> differenceList) {
+public class Stylish {
+    public static String differenceToStylish(List<Map<String, Object>> differenceList) {
         StringBuilder result = new StringBuilder("{\n");
         var size = differenceList.size();
         var index = 0;
@@ -46,3 +46,4 @@ public class Json {
         return result.append("}").toString();
     }
 }
+

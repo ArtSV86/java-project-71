@@ -3,7 +3,7 @@ package hexlet.code;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.util.Map;
 
@@ -12,12 +12,14 @@ public class Parser {
         switch (fileFormat) {
             case "json" -> {
                 ObjectMapper objectMapper = new ObjectMapper();
-                return objectMapper.readValue(fileContent, new TypeReference<>() { });
+                return objectMapper.readValue(fileContent, new TypeReference<>() {
+                });
             }
-//            case "yml" -> {
-//                ObjectMapper mapper = new YAMLMapper();
-//                return mapper.readValue(fileContent, new TypeReference<>() { });
-//            }
+            case "yaml" -> {
+                ObjectMapper mapper = new YAMLMapper();
+                return mapper.readValue(fileContent, new TypeReference<>() {
+                });
+            }
             default -> throw new RuntimeException("Unexpected format: " + fileFormat);
         }
     }
