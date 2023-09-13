@@ -9,8 +9,8 @@ import java.util.List;
 public class Differ {
 
     public static String generate(String filePath1, String filePath2, String formatName) throws IOException {
-        String fileContent1 = Files.readString(Paths.get("src/main/resources/file1.json").toAbsolutePath().normalize());
-        String fileContent2 = Files.readString(Paths.get("src/main/resources/file2.json").toAbsolutePath().normalize());
+        String fileContent1 = Files.readString(Paths.get(filePath1).toAbsolutePath().normalize());
+        String fileContent2 = Files.readString(Paths.get(filePath2).toAbsolutePath().normalize());
         String fileFormat1 = defineFormat(filePath1);
         String fileFormat2 = defineFormat(filePath2);
         Map<String, Object> data1 = Parser.toMap(fileContent1, fileFormat1);
