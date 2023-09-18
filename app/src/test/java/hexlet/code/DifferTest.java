@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,9 +51,8 @@ class DifferTest {
         String filePath2 = "src/test/resources/file2.json";
         String actual = Differ.generate(filePath1, filePath2, formatName);
         assertThat(actual).isEqualTo(expectedStylish);
-
-
     }
+
     @Test
     public void expectedStylishTwoWithJsonTest() throws IOException {
 
@@ -60,9 +60,7 @@ class DifferTest {
         String filePath1 = "src/test/resources/file3.json";
         String filePath2 = "src/test/resources/file4.json";
         String actual = Differ.generate(filePath1, filePath2, formatName);
-        assertThat(actual).isEqualTo(expectedStylish2);
-
-
+        Assertions.assertEquals(actual, expectedStylish2);
     }
 
     @Test
@@ -71,7 +69,7 @@ class DifferTest {
         String filePath1 = "src/test/resources/file3.json";
         String filePath2 = "src/test/resources/file4.json";
         String actual = Differ.generate(filePath1, filePath2, formatName);
-        assertThat(actual).isEqualTo(expectedPlain);
+        Assertions.assertEquals(actual, expectedPlain);
     }
 
     @Test
@@ -80,7 +78,7 @@ class DifferTest {
         String filePath1 = "src/test/resources/file1.json";
         String filePath2 = "src/test/resources/file2.json";
         String actual = Differ.generate(filePath1, filePath2, formatName);
-        assertThat(actual).isEqualTo(expectedJson);
+        Assertions.assertEquals(actual, expectedJson);
     }
 
     @Test
@@ -90,7 +88,8 @@ class DifferTest {
         String filePath1 = "src/test/resources/file1.yaml";
         String filePath2 = "src/test/resources/file2.yaml";
         String actual = Differ.generate(filePath1, filePath2, formatName);
-        assertThat(actual).isEqualTo(expectedStylish);
+        Assertions.assertEquals(actual, expectedStylish);
+
     }
 
 }

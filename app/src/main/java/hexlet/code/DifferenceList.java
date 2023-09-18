@@ -8,6 +8,8 @@ public class DifferenceList {
         keys.addAll(data2.keySet());
         List<Map<String, Object>> differenceList = new LinkedList<>();
         for (String key : keys) {
+            Object val1 = (data1.get(key) == null ? "null" : data1.get(key));
+            Object val2 = (data2.get(key) == null ? "null" : data2.get(key));
             if (!data2.containsKey(key)) {
                 Map<String, Object> node = Map.of("type", "removed", "key", key,
                         "value1", data1.get(key));
@@ -16,9 +18,9 @@ public class DifferenceList {
                 Map<String, Object> node = Map.of("type", "added", "key", key, "value1", data2.get(key));
                 differenceList.add(node);
             } else if (data1.containsKey(key) && data2.containsKey(key)
-                    && !(data1.get(key).toString()).equals((data2.get(key).toString()))) {
+                    && !val1.equals(val2)) {
                 Map<String, Object> node = Map.of("type", "changed", "key", key,
-                        "value1", data1.get(key), "value2", data2.get(key));
+                        "value1", val1, "value2", val2);
                 differenceList.add(node);
             } else {
                 Map<String, Object> node = Map.of("type", "unchanged", "key", key,

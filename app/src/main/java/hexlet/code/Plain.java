@@ -13,7 +13,7 @@ public class Plain {
             Object value1 = map.get("value1");
             Object value2 = map.get("value2");
             Object key = map.get("key");
-            switch ("type") {
+            switch (String.valueOf(map.get("type"))) {
                 case "changed" -> result.append("Property ")
                         .append("'")
                         .append(key)
