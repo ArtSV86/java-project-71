@@ -1,1 +1,1 @@
-[{value1=false, key=follow, type=removed}, {value1=hexlet.io, key=host, type=unchanged}, {value1=123.234.53.22, key=proxy, type=removed}, {key=timeout, value1=50, value2=20, type=changed}, {value1=true, key=verbose, type=added}]
+[{"type":"removed","value1":false,"key":"follow"},{"type":"unchanged","value1":"hexlet.io","key":"host"},{"type":"removed","value1":"123.234.53.22","key":"proxy"},{"value1":50,"value2":20,"type":"changed","key":"timeout"},{"type":"added","value1":true,"key":"verbose"}]
