@@ -38,6 +38,7 @@ public final class App implements Callable<Integer> {
             String formattedDiff = Differ.generate(filePath1, filePath2, formatName);
             System.out.println(formattedDiff);
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println(e.getMessage());
             return ERROR_EXIT_CODE;
         }
