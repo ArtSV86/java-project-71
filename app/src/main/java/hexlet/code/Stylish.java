@@ -50,5 +50,4 @@ public class Stylish {
         }
         return result.append("}").toString();
     }
-
 }
