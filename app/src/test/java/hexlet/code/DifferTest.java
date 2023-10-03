@@ -1,7 +1,7 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -13,43 +13,37 @@ import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DifferTest {
-    private final ClassLoader classLoader = getClass().getClassLoader();
-    private String expectedStylish;
-    private String expectedStylish2;
-    private String expectedPlain;
-    private String expectedJson;
+    static DifferTest demoObject = new DifferTest();
+    private final static ClassLoader classLoader = demoObject.getClass().getClassLoader();
+    private static String expectedStylish;
+    private static String expectedStylish2;
+    private static String expectedPlain;
+    private static String expectedJson;
 
-    @BeforeEach
-    final void beforeEach() throws IOException {
-        String expectedStylishFile = Objects.requireNonNull(classLoader
-                        .getResource("result_stylish.txt"))
+    @BeforeAll
+    public static void beforeAll() throws IOException {
+
+        expectedStylish = read("result_stylish.txt");
+        expectedStylish2 = read("result_stylish2.txt");
+        expectedPlain = read("result_plain.txt");
+        expectedJson = read("result_json.json");
+    }
+
+    public static String read(String fileName) throws IOException {
+
+        String expectedFile = Objects.requireNonNull(classLoader
+                        .getResource(fileName))
                 .getFile();
-        Path pathExpectedStylishFile = Paths.get(expectedStylishFile).toAbsolutePath().normalize();
-        expectedStylish = Files.readString(pathExpectedStylishFile);
-        String expectedStylishFile2 = Objects.requireNonNull(classLoader
-                        .getResource("result_stylish2.txt"))
-                .getFile();
-        Path pathExpectedStylishFile2 = Paths.get(expectedStylishFile2).toAbsolutePath().normalize();
-        expectedStylish2 = Files.readString(pathExpectedStylishFile2);
-        String expectedPlainFile = Objects.requireNonNull(classLoader
-                        .getResource("result_plain.txt"))
-                .getFile();
-        Path pathExpectedPlainFile = Paths.get(expectedPlainFile).toAbsolutePath().normalize();
-        expectedPlain = Files.readString(pathExpectedPlainFile);
-        String expectedJsonFile = Objects.requireNonNull(classLoader
-                        .getResource("result_json.json"))
-                .getFile();
-        Path pathExpectedJsonFile = Paths.get(expectedJsonFile).toAbsolutePath().normalize();
-        expectedJson = Files.readString(pathExpectedJsonFile);
+        Path pathExpectedFile = Paths.get(expectedFile).toAbsolutePath().normalize();
+        return Files.readString(pathExpectedFile);
     }
 
     @Test
-    public void expectedStylishWithJsonTest() throws IOException {
+    public void expectedStylishWithJsonTestAndWithoutFormatName() throws IOException {
 
-        String formatName = "stylish";
         String filePath1 = "src/test/resources/file1.json";
         String filePath2 = "src/test/resources/file2.json";
-        String actual = Differ.generate(filePath1, filePath2, formatName);
+        String actual = Differ.generate(filePath1, filePath2);
         assertThat(actual).isEqualTo(expectedStylish);
     }
 
@@ -82,14 +76,22 @@ class DifferTest {
     }
 
     @Test
-    public void expectedStylishWithYamlTest() throws IOException {
+    public void expectedStylishWithYamlTestAndWithoutFormatName() throws IOException {
 
-        String formatName = "stylish";
         String filePath1 = "src/test/resources/file1.yaml";
         String filePath2 = "src/test/resources/file2.yaml";
-        String actual = Differ.generate(filePath1, filePath2, formatName);
+        String actual = Differ.generate(filePath1, filePath2);
         Assertions.assertEquals(actual, expectedStylish);
 
     }
 
+    @Test
+    public void expectedStylishTwoWithYamlTest() throws IOException {
+
+        String formatName = "stylish";
+        String filePath1 = "src/test/resources/file3.yaml";
+        String filePath2 = "src/test/resources/file4.yaml";
+        String actual = Differ.generate(filePath1, filePath2, formatName);
+        Assertions.assertEquals(actual, expectedStylish2);
+    }
 }

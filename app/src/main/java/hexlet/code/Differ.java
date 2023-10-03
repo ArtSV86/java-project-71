@@ -1,7 +1,10 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
+
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
@@ -10,14 +13,14 @@ import java.util.Map;
 public class Differ {
 
     public static String generate(String filePath1, String filePath2, String formatName) throws IOException {
-        String fileContent1 = Files.readString(Paths.get(filePath1).toAbsolutePath().normalize());
-        String fileContent2 = Files.readString(Paths.get(filePath2).toAbsolutePath().normalize());
-        String fileFormat1 = defineFormat(filePath1);
-        String fileFormat2 = defineFormat(filePath2);
-        Map<String, Object> data1 = Parser.toMap(fileContent1, fileFormat1);
-        Map<String, Object> data2 = Parser.toMap(fileContent2, fileFormat2);
-        List<Map<String, Object>> differenceList = DifferenceList.build(data1, data2);
+
+        Map<String, Object> data1 = getData(filePath1);
+        Map<String, Object> data2 = getData(filePath2);
+        List<Map<String, Object>> differenceList = TreeBuild.build(data1, data2);
         return Formatter.toString(differenceList, formatName);
+    }
+    public static String generate(String filePath1, String filePath2) throws IOException {
+        return generate(filePath1, filePath2, "stylish");
     }
 
     public static String defineFormat(String filePath) {
@@ -28,5 +31,13 @@ public class Differ {
         } else {
             throw new RuntimeException("File '" + filePath + "' is in an unknown format");
         }
+    }
+
+
+    public static Map<String, Object> getData(String filePath) throws IOException {
+        Path path = Paths.get(filePath).toAbsolutePath().normalize();
+        String fileContent = Files.readString(path);
+        String fileFormat = defineFormat(filePath);
+        return Parser.toMap(fileContent, fileFormat);
     }
 }
