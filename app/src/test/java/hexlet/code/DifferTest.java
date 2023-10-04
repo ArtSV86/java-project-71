@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DifferTest {
     static DifferTest demoObject = new DifferTest();
-    private final static ClassLoader classLoader = demoObject.getClass().getClassLoader();
+    private final static ClassLoader CLASS_LOADER = demoObject.getClass().getClassLoader();
     private static String expectedStylish;
     private static String expectedStylish2;
     private static String expectedPlain;
@@ -31,7 +31,7 @@ class DifferTest {
 
     public static String read(String fileName) throws IOException {
 
-        String expectedFile = Objects.requireNonNull(classLoader
+        String expectedFile = Objects.requireNonNull(CLASS_LOADER
                         .getResource(fileName))
                 .getFile();
         Path pathExpectedFile = Paths.get(expectedFile).toAbsolutePath().normalize();
