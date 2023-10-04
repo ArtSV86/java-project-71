@@ -13,8 +13,7 @@ import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DifferTest {
-    static DifferTest demoObject = new DifferTest();
-    private final static ClassLoader CLASS_LOADER = demoObject.getClass().getClassLoader();
+
     private static String expectedStylish;
     private static String expectedStylish2;
     private static String expectedPlain;
@@ -29,13 +28,11 @@ class DifferTest {
         expectedJson = read("result_json.json");
     }
 
+
     public static String read(String fileName) throws IOException {
 
-        String expectedFile = Objects.requireNonNull(CLASS_LOADER
-                        .getResource(fileName))
-                .getFile();
-        Path pathExpectedFile = Paths.get(expectedFile).toAbsolutePath().normalize();
-        return Files.readString(pathExpectedFile);
+        String expectedFile = "./src/test/resources/" + fileName;
+        return Files.readString(Paths.get(expectedFile));
     }
 
     @Test
