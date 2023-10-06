@@ -19,6 +19,7 @@ public class Differ {
         List<Map<String, Object>> differenceList = TreeBuild.build(data1, data2);
         return Formatter.toString(differenceList, formatName);
     }
+
     public static String generate(String filePath1, String filePath2) throws IOException {
         return generate(filePath1, filePath2, "stylish");
     }
@@ -28,6 +29,8 @@ public class Differ {
             return "json";
         } else if (filePath.endsWith("yaml")) {
             return "yaml";
+        } else if (filePath.endsWith("yml")) {
+            return "yml";
         } else {
             throw new RuntimeException("File '" + filePath + "' is in an unknown format");
         }

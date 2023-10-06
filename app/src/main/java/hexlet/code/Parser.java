@@ -15,11 +15,13 @@ public class Parser {
                 return objectMapper.readValue(fileContent, new TypeReference<>() {
                 });
             }
-            case "yaml" -> {
+
+            case "yaml", "yml" -> {
                 ObjectMapper mapper = new YAMLMapper();
                 return mapper.readValue(fileContent, new TypeReference<>() {
                 });
             }
+
             default -> throw new RuntimeException("Unexpected format: " + fileFormat);
         }
     }
